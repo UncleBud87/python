@@ -15,15 +15,15 @@
 // is your code clear and easily readable? is it formatted well?
 
 function rotateArr(arr, shiftBy) {
-    var temp=arr[arr.length-1];
-    arr[0] = arr[arr.length-1] = temp;
-    return arr;
-}
 
-    for (var i = 0; i< arr.length; i++){
-    
+    while(shiftBy > 0) {
+        var temp = arr[arr.length - 1];
+        for (var i = arr.length-1; i>= 0 ; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[0] = temp;
+        shiftBy -= 1;
     }
-    
     return arr;
 }
 

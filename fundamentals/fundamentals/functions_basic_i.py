@@ -99,14 +99,14 @@ print(b) #500
 
 #13
 b = 500
-print(b)
+print(b) #500
 def foobar():
     b = 300
     print(b)
     return b
-print(b)
-b=foobar()
-print(b)
+print(b) #500
+b=foobar() #300
+print(b) #300
 
 
 #14
@@ -116,17 +116,17 @@ def foo():
     print(2)
 def bar():
     print(3)
-foo()
+foo() # 1 3 2
 
 
 #15
 def foo():
-    print(1)
-    x = bar()
-    print(x)
+    print(1) #1
+    x = bar() # 3
+    print(x) # 5
     return 10
 def bar():
     print(3)
     return 5
-y = foo()
-print(y)
+y = foo() 
+print(y) #10

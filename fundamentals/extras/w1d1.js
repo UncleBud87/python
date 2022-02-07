@@ -15,6 +15,10 @@
 // is your code clear and easily readable? is it formatted well?
 
 function rotateArr(arr, shiftBy) {
+    shiftBy = shiftBy % arr.length;
+    if (shiftBy < 0) {
+        shiftBy = arr.length + shiftBy;
+    }
 
     while(shiftBy > 0) {
         var temp = arr[arr.length - 1];

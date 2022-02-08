@@ -1,11 +1,8 @@
 
 class BankAccount:
-    def __init__(self, name, int_rate, deposit, withdraw, balance):
-        self.name = name
-        self.intRate = int_rate
-        self.deposit = deposit
-        self.withdraw = withdraw
+    def __init__(self, int_rate, balance):
         self.balance = balance
+        self.intRate = int_rate
 
     def depositMoney(self, amount):
         if amount > 0:
@@ -31,15 +28,23 @@ class User:
         self.name = name
         self.account = BankAccount(int_rate = 0.01, balance=0)
 
-    def make_deposit(self, amount):
-        self.account.deposit(amount)
+    def depositMoney(self, amount):
+        self.account.depositMoney(amount)
         return self
 
+    def withdrawMoney(self, amount):
+        self.account.withdrawMoney(amount)
+        return self
 
-bob = BankAccount('Bob', .1, 0, 0, 0)
-tom = BankAccount('Tom', .1, 0, 0, 0)
-jon = BankAccount('Jon', .1, 0, 0, 0)
+    def displayBalance(self):
+        self.account.displayBalance()
+        return self
 
-bob.depositMoney(105).depositMoney(100).depositMoney(100).withdrawMoney(50).displayBalance().yield_interest()
-tom.depositMoney(75).depositMoney(450).withdrawMoney(25).withdrawMoney(40).withdrawMoney(30).withdrawMoney(60).yield_interest().displayBalance()
-print(bob.balance)
+    def yield_interest(self):
+        self.yield_interest()
+        return self
+
+bob = User("Bob")
+tom = User("Tom")
+
+bob.depositMoney(105).depositMoney(100).depositMoney(100).displayBalance()

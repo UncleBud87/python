@@ -13,7 +13,7 @@ for x in range(1,101):
     elif x%5 == 0:
         print ("Coding")
 
-sum=0
+sum = 0
 for x in range(500,000):
     if x%2 == 1:
         sum += 1

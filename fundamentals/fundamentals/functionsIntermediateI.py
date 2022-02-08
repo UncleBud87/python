@@ -1,4 +1,7 @@
 
+from re import I
+
+
 x = [ [5,2,3], [10,8,9] ]
 x.pop(1)
 x.append([15,8,9])
@@ -25,21 +28,59 @@ z[0]['y'] = 30
 print(z)
 
 
-employees = [
-        {'first_name' : 'Michael', 'last_name' : 'Jordan'},
+students = [
+        {'first_name':  'Michael', 'last_name' : 'Jordan'},
         {'first_name' : 'John', 'last_name' : 'Rosales'},
         {'first_name' : 'Mark', 'last_name' : 'Guillen'},
         {'first_name' : 'KB', 'last_name' : 'Tonel'}
     ]
 
-def iterateDictionary(employeeNames):
-    for employees = ['first_name' : '', 'last_name','']
+def iterateDictionary(students):
+    for student in students:
+        print(f"first_name- {student['first_name']}, last_name - {student['last_name']}")
 
+iterateDictionary(students)
 
-#iterateDictionary(students) 
-#should output: (it's okay if each key-value pair ends up on 2 separate lines;
-#bonus to get them to appear exactly as below!)
-#first_name - Michael, last_name - Jordan
-#first_name - John, last_name - Rosales
-#first_name - Mark, last_name - Guillen
-#first_name - KB, last_name - Tonel
+# should output: (it's okay if each key-value pair ends up on 2 separate lines;
+# bonus to get them to appear exactly as below!)
+# first_name - Michael, last_name - Jordan
+# first_name - John, last_name - Rosales
+# first_name - Mark, last_name - Guillen
+# first_name - KB, last_name - Tonel
+
+students = [
+        {'first_name':  'Michael', 'last_name' : 'Jordan'},
+        {'first_name' : 'John', 'last_name' : 'Rosales'},
+        {'first_name' : 'Mark', 'last_name' : 'Guillen'},
+        {'first_name' : 'KB', 'last_name' : 'Tonel'}
+    ]
+def iterateDictionary2(a, b):
+    for x in range(0,4):
+        if str(a) == 'first_name':
+            print(students[x]['first_name'])
+        elif str(a) == 'last_name':
+            print(students[x]['last_name'])
+
+print(iterateDictionary2('first_name', students))
+print(iterateDictionary2('last_name', students))
+
+#Michael
+#John
+#Mark
+#KB
+
+#Jordan
+#Rosales
+#Guillen
+#Tonel
+
+dojo = {
+    'locations': ['San Jose', 'Seattle', 'Dallas', 'Chicago', 'Tulsa', 'DC', 'Burbank'],
+    'instructors': ['Michael', 'Amy', 'Eduardo', 'Josh', 'Graham', 'Patrick', 'Minh', 'Devon']
+}
+
+def printInfo(dojo):
+    
+    print(dojo('locations', 'instructors'))
+
+printInfo(dojo)

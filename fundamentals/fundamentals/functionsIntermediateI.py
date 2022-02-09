@@ -84,7 +84,10 @@ dojo = {
 }
 
 def printInfo(dojo):
-    print(dojo['locations'])
-    print(dojo['instructors'])
+        for key in dojo:
+            print(f"{len(dojo[key])}{key}")
+            for i in range(0,len(dojo[key])):
+                print(dojo[key][i])
+        
 
 printInfo(dojo)

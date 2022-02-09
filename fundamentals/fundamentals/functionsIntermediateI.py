@@ -15,6 +15,8 @@ students = [
 students[0]['last_name'] = 'Bryant'
 print(students)
 
+
+
 sports_directory = {
     'basketball' : ['Kobe', 'Jordan', 'James', 'Curry'],
     'soccer' : ['Messi', 'Ronaldo', 'Rooney']
@@ -22,6 +24,8 @@ sports_directory = {
 
 sports_directory['soccer'][0] = 'Andres'
 print(sports_directory)
+
+
 
 z = [ {'x': 10, 'y': 20} ]
 z[0]['y'] = 30
@@ -80,7 +84,7 @@ dojo = {
 }
 
 def printInfo(dojo):
-    
-    print(dojo('locations', 'instructors'))
+    print(dojo['locations'])
+    print(dojo['instructors'])
 
 printInfo(dojo)

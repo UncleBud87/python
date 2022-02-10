@@ -32,6 +32,13 @@ console.log(minIndex(test_array2, 0, 7)); // should return 7
 
 function selectionSort(arr) {
 
+    for (var i = 0; i < arr.length; i++) {
+        var smallestIndex = minIndex(arr, i, arr.length -1);
+        var temp = arr[i];
+        arr[i] = arr[smallestIndex];
+        arr[smallestIndex] = temp;
+    }
+
 }
 
 selectionSort(test_array2);

@@ -20,11 +20,13 @@ def hi(name):
 
 
 @app.route('/repeat/<id_num>/<id_name>')
-def repeat(id_num, id_name):
-    output = ""
-    for i in range(0,int(id_num)):
-        output += id_name
-        return output
+def repeat(num, name):
+    output = ''
+
+    for i in range(0,num):
+        output += f"<h1>{name}</p>"
+        
+    return output
 
 
 if __name__ == "__main__":

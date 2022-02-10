@@ -41,5 +41,9 @@ function selectionSort(arr) {
 
 }
 
+
+
+
+
 selectionSort(test_array2);
 console.log(test_array2); // should return [-7, 0, 1, 2, 4, 4, 6, 8, 9]

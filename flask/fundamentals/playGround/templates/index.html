@@ -20,7 +20,7 @@
 </head>
 <body>
     <div class="wrapper">
-        {% for i in range(0,num) %}
+        {% for i in range(0,num%2) %}
         <div class="box" style ="background-color: {{color}};"></div>
         {% endfor %}
     </div>

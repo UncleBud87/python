@@ -11,8 +11,22 @@
 // Once you complete the function: are there other ways to do it? (Hint: there are definitely other ways to do it.) Try writing out another solution with your group. Is one more readable than the other? Is one more efficient? 
 
 function deduplicateSortedArray(arr) {
-
+    var dupes = 0;
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] === arr[i - 1]) {
+            dupes++;
+        } else {
+            arr[i - dupes] = arr[i];
+        }
+        console.log(arr)
+    }
+    arr.length -= dupes;
+    return arr;
 }
+
+
+
+
 
 // Things to consider:
 // There are lots of ways of solving this problem - if your group has multiple passionate people, you may get bogged down in deciding which solution to pursue. There's merit in trying to find the best course of action before beginning a task, but overthinking and overplanning is a risk. Remember that a good, working solution that runs and is demonstratable is better than a perfect solution that exists only in your head.

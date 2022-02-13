@@ -1,4 +1,5 @@
 
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -19,11 +20,11 @@ def hi(name):
     return "hi, " + name
 
 
-@app.route('/repeat/<id_num>/<id_name>')
+@app.route('/repeat/<num>/<name>')
 def repeat(num, name):
-    output = ''
+    output =""
 
-    for i in range(0,num):
+    for i in range(0, int(num)):
         output += f"<h1>{name}</p>"
         
     return output

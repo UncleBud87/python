@@ -7,15 +7,13 @@ app.secret_key = 'keep it secret, keep it safe'
 def index():
     return render_template('index.html')
 
-@app.route('/process_form', methods=['POST'])
-def process_form():
-    session['first_name'] = request.form['first_name']
-    return redirect('/result')
+@app.route('/guess')
+def guess(num):
+    if(guess < num):
+        return render_template("index.html")
+    
 
-@app.route('/result')
-def result():
-    first_name = session['first_name']
-    return render_template('result.html', first_name = first_name)
+    return render_template("index.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

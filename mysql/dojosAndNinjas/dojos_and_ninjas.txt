@@ -1,0 +1,45 @@
+14:03:03	insert into dojos (name) values('gojo')	1 row(s) affected	0.000 sec
+
+14:03:03	insert into dojos (name) values('mojo')	1 row(s) affected	0.016 sec
+
+14:03:03	insert into dojos (name) values('gpogo')	1 row(s) affected	0.016 sec
+
+14:08:49	DELETE FROM dojos where id=1	1 row(s) affected	0.000 sec
+
+14:08:49	DELETE FROM dojos where id=2	1 row(s) affected	0.016 sec
+
+14:08:49	DELETE FROM dojos where id=3	1 row(s) affected	0.016 sec
+
+14:10:18	insert into dojos(name) values('gojo')	1 row(s) affected	0.016 sec
+
+14:10:18	insert into dojos(name) values('mojo')	1 row(s) affected	0.000 sec
+
+14:10:18	insert into dojos(name) values('pogo')	1 row(s) affected	0.000 sec
+
+14:20:00	insert into ninjas (first_name, last_name, age, dojos_id) values('mike', 'mikerson', 35, 4)	1 row(s) affected	0.015 sec
+
+14:20:00	insert into ninjas (first_name, last_name, age, dojos_id) values('bob', 'boberson', 31, 4)	1 row(s) affected	0.000 sec
+
+14:20:00	insert into ninjas (first_name, last_name, age, dojos_id) values('jack', 'jackerson', 25, 4)	1 row(s) affected	0.016 sec
+
+14:21:03	insert into ninjas (first_name, last_name, age, dojos_id) values('pike', 'pikerson', 35, 5)	1 row(s) affected	0.047 sec
+
+14:21:03	insert into ninjas (first_name, last_name, age, dojos_id) values('rob', 'roberson', 31, 5)	1 row(s) affected	0.016 sec
+
+14:21:03	insert into ninjas (first_name, last_name, age, dojos_id) values('mack', 'mackerson', 25, 5)	1 row(s) affected	0.015 sec
+
+14:21:48	insert into ninjas (first_name, last_name, age, dojos_id) values('sike', 'sikerson', 35, 6)	1 row(s) affected	0.016 sec
+
+14:21:48	insert into ninjas (first_name, last_name, age, dojos_id) values('job', 'joberson', 31, 6)	1 row(s) affected	0.016 sec
+
+14:21:48	insert into ninjas (first_name, last_name, age, dojos_id) values('sack', 'sackerson', 25, 6)	1 row(s) affected	0.000 sec
+
+14:26:17	select * from dojos where id = 4 LIMIT 0, 1000	1 row(s) returned	0.000 sec / 0.000 sec
+
+14:26:58	select * from ninjas where dojos_id = 4 LIMIT 0, 1000	3 row(s) returned	0.000 sec / 0.000 sec
+
+14:27:27	select * from ninjas where dojos_id = 6 LIMIT 0, 1000	3 row(s) returned	0.000 sec / 0.000 sec
+
+14:28:00	select * from ninjas LIMIT 0, 1000	9 row(s) returned	0.000 sec / 0.000 sec
+
+14:28:24	select dojos_id from ninjas where id = 11 LIMIT 0, 1000	1 row(s) returned	0.000 sec / 0.000 sec

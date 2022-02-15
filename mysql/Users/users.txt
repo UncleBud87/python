@@ -1,0 +1,29 @@
+12:59:09	SELECT * FROM users_schema.users LIMIT 0, 1000	0 row(s) returned	0.000 sec / 0.000 sec
+
+13:09:50	INSERT INTO users (first_name, last_name, email) VALUES ('i.c.', 'weiner', 'i.c.weiner@mail.com')	1 row(s) affected	0.000 sec
+
+13:10:05	INSERT INTO users (first_name, last_name, email) VALUES ('i.c.', 'weiner', 'i.c.weiner@mail.com')	1 row(s) affected	0.000 sec
+
+13:14:31	SELECT * FROM users LIMIT 0, 1000	2 row(s) returned	0.000 sec / 0.000 sec
+
+13:17:33	UPDATE users SET first_name = 'tod', last_name = 'todderson', email = 'todderson@mail.com' WHERE id = 1	1 row(s) affected Rows matched: 1  Changed: 1  Warnings: 0	0.000 sec
+
+13:18:42	SELECT * FROM users LIMIT 0, 1000	2 row(s) returned	0.000 sec / 0.000 sec
+
+13:20:12	INSERT INTO users (first_name, last_name, email) values ('mike', 'mikerson', 'mikerson@mail.com')	1 row(s) affected	0.015 sec
+
+13:20:37	select * from users LIMIT 0, 1000	3 row(s) returned	0.000 sec / 0.000 sec
+
+13:24:19	select * from users where email = 'todderson@mail.com' LIMIT 0, 1000	1 row(s) returned	0.000 sec / 0.000 sec
+
+13:25:09	select * from users where id = '3' LIMIT 0, 1000	1 row(s) returned	0.000 sec / 0.000 sec
+
+13:30:50	update users set last_name = 'Pancakes' where id=3	1 row(s) affected Rows matched: 1  Changed: 1  Warnings: 0	0.016 sec
+
+13:31:09	select * from users LIMIT 0, 1000	3 row(s) returned	0.000 sec / 0.000 sec
+
+13:32:08	delete from users where id=2	1 row(s) affected	0.016 sec
+
+13:32:30	select * from users LIMIT 0, 1000	2 row(s) returned	0.000 sec / 0.000 sec
+
+13:40:21	select * from users order by first_name LIMIT 0, 1000	2 row(s) returned	0.000 sec / 0.000 sec

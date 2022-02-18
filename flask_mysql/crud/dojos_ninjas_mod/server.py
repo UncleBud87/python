@@ -1,5 +1,5 @@
 
-from dojos_ninjas_mod.controllers import dojos, ninjas
+from flask_app.controllers import dojos, ninjas
 
 from dojos_ninjas_mod import app
 

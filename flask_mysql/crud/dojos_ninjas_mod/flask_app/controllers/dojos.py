@@ -1,9 +1,9 @@
 
 from flask import render_template,redirect,request,session
 
-from dojos_ninjas_mod import app
+from flask_app import app
 
-from dojos_ninjas_mod.models.dojo import Dojo
+from flask_app.models.dojo import Dojo
 
 
 @app.route("/")

@@ -24,10 +24,9 @@
         <div class="container">
             <h1>All Dojos</h1>
             {% for dojo in dojos %}
-            <TAble>
+            <TAble class="table table-borderless">
                 <tr>
-                    <th scope="row">{{dojo.id}}</th>
-                    <td>{{dojo.name}}</td>
+                    <td><a href="">{{dojo.name}}</a></td>
                 </tr>
             </TAble>
             {% endfor %}

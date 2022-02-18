@@ -10,6 +10,20 @@ class Ninja:
         self.age = data['age']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.dojos_id = data['dojos_id']
+    
+
+    @classmethod
+    def save(cls, data):
+        query = "INSERT INTO dojos (name) VALUES (%(dojos_id)s);"
+        result = connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
+        return result
+
+    @classmethod
+    def save(cls, data):
+        query = "INSERT INTO ninjas (name) VALUES (%(name)s);"
+        result = connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
+        return result
 
     @classmethod
     def get_all(cls):
@@ -20,11 +34,6 @@ class Ninja:
             ninja.append( cls(u) )
         return ninja
 
-    @classmethod
-    def save(cls, data):
-        query = "INSERT INTO ninjas (name) VALUES (%(name)s);"
-        result = connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
-        return result
 
     @classmethod
     def get_one(cls,data):

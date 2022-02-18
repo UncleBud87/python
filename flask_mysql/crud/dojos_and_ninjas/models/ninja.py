@@ -15,10 +15,10 @@ class Ninja:
     def get_all(cls):
         query = "SELECT * FROM ninjas;"
         results = connectToMySQL('dojos_and_ninjas_schema').query_db(query)
-        users = []
+        ninjas = []
         for u in results:
-            users.append( cls(u) )
-        return users
+            ninjas.append( cls(u) )
+        return ninjas
 
     @classmethod
     def save(cls, data):

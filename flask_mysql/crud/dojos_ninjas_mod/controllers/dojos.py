@@ -1,3 +1,4 @@
+
 from flask import render_template,redirect,request,session
 
 from dojos_ninjas_mod import app
@@ -10,5 +11,5 @@ def index():
 
 
 @app.route("/dojos")
-def dojos():
-    return render_template("dojos.html", dojos=Dojo.get_all())
+def dojo():
+    return render_template("dojos.html", dojo=Dojo.get_all())

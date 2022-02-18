@@ -1,4 +1,5 @@
-from dojos_and_ninjas.config.mysqlconnection import connectToMySQL
+
+from dojos_ninjas_mod.config.mysqlconnection import connectToMySQL
 
 
 class Dojo:
@@ -12,10 +13,10 @@ class Dojo:
     def get_all(cls):
         query = "SELECT * FROM dojos;"
         results = connectToMySQL('dojos_and_ninjas_schema').query_db(query)
-        dojos = []
+        dojo = []
         for u in results:
-            dojos.append( cls(u) )
-        return dojos
+            dojo.append( cls(u) )
+        return dojo
 
     @classmethod
     def save(cls, data):

@@ -13,25 +13,26 @@
 <body>
     <div class="container">
         <h1>{{ dojo.name }} Ninjas</h1>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">{{ ninja.id }}</th>
+                    <td>{{ ninja.first_name }}</td>
+                    <td>{{ ninja.last_name }}</td>
+                    <td>{{ ninja.age }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">{{ ninja.id }}</th>
-                <td>{{ ninja.first_name }}</td>
-                <td>{{ ninja.last_name }}</td>
-                <td>{{ ninja.age }}</td>
-            </tr>
-        </tbody>
-    </table>
 </body>
 
 </html>

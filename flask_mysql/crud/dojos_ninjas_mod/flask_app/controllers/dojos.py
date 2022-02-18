@@ -8,7 +8,7 @@ from flask_app.models.dojo import Dojo
 
 @app.route("/")
 def index():
-    return render_template('/dojos')
+    return redirect('/dojos')
 
 
 @app.route("/dojos")

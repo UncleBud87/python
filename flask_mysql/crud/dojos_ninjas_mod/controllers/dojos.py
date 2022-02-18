@@ -5,6 +5,7 @@ from dojos_ninjas_mod import app
 
 from dojos_ninjas_mod.models.dojo import Dojo
 
+
 @app.route("/")
 def index():
     return redirect('/dojos')

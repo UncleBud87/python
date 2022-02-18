@@ -8,9 +8,9 @@ from flask_app.models.dojo import Dojo
 
 @app.route("/")
 def index():
-    return redirect('/index')
+    return render_template('/dojos')
 
 
-@app.route("/index")
+@app.route("/dojos")
 def dojo():
-    return render_template("index.html", dojo=Dojo.get_all())
+    return render_template("dojos.html", dojo=Dojo.get_all())

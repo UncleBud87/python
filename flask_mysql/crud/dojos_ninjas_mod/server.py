@@ -1,7 +1,7 @@
 
 from flask_app.controllers import dojos, ninjas
 
-from dojos_ninjas_mod import app
+from flask_app import app
 
 
 if __name__ == "__main__":

@@ -25,9 +25,9 @@
             <h1>All Dojos</h1>
             {% for dojo in dojos %}
             <TAble class="table table-borderless">
-                <form action="/dojo/ninjas" method="post"></form>
+                <form action="/dojo/{[id]}/ninjas" method="post">
                 <tr>
-                    <td class="breadcrumb">{{dojo.name}}</td>
+                    <td><input type="submit" name="{{dojo.name}}">{{dojo.name}}</td>
                 </tr>
                 </form>
             </TAble>

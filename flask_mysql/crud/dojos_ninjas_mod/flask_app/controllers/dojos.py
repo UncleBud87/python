@@ -16,9 +16,10 @@ def index():
 def dojo():
     return render_template("dojos.html", dojos=Dojo.get_all())
 
-@app.route("/dojos/ninjas",methods=['POST'])
-def dojos_ninjas(name):
-    data ={
-        'dojos_id' : name
+
+@app.route('/dojos/<int:id>/dojo',methods=['POST'])
+def dojos_ninjas_show(id):
+    data = {
+        'id':id
     }
-    return render_template("dojos_ninjas.html", dojo=Dojo.get_all(), ninja=Ninja.get_all())
+    return render_template('dojos_ninjas.html',dojo=Dojo.get_one(data),ninja=Ninja.get_one(data))

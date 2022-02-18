@@ -1,5 +1,5 @@
-
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models import ninja
 
 
 class Dojo:
@@ -11,18 +11,26 @@ class Dojo:
         self.ninjas = []
 
     @classmethod
-    def get_dojos_with_ninjas( cls , data ):
+    def save(cls, data):
+        query = "INSERT INTO dojos (name) VALUES (%(name)s);"
+        result = connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
+
+    @classmethod
+    def get_dojo_with_ninjas( cls , data ):
         query = "SELECT * FROM dojos LEFT JOIN ninjas ON ninjas.dojos_id = dojos.id WHERE dojos.id = %(id)s;"
         results = connectToMySQL('ninjas').query_db( query , data )
-        # results will be a list of topping objects with the burger attached to each row. 
+
         dojo = cls( results[0] )
         for row_from_db in results:
-            # Now we parse the burger data to make instances of burgers and add them into our list.
+
             ninja_data = {
-                "id" : row_from_db["ninjas.id"],
-                "first_name" : row_from_db["ninjas.first_name"],
-                "created_at" : row_from_db["ninjas.created_at"],
-                "updated_at" : row_from_db["ninjas.updated_at"]
+                "id" : row_from_db["id"],
+                "first_name" : row_from_db["ninja.first_name"],
+                'last_name' : row_from_db['last_name'],
+                'age' : row_from_db['age'],
+                'created_at' : row_from_db['created_at'],
+                'updated_at' : row_from_db['updated_at'],
+                'dojos_id' : row_from_db['dojos_id']
             }
             dojo.ninjas.append( ninja.Ninja( ninja_data ) )
         return dojo
@@ -36,11 +44,6 @@ class Dojo:
         for u in results:
             dojo.append( cls(u) )
         return dojo
-
-    @classmethod
-    def save(cls, data):
-        query = "INSERT INTO dojos (name) VALUES (%(name)s);"
-        result = connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
 
     @classmethod
     def get_one(cls,data):

@@ -5,13 +5,15 @@ from dojos_ninjas_mod.config.mysqlconnection import connectToMySQL
 class Ninja:
     def __init__(self, data):
         self.id = data['id']
-        self.name = data['name']
+        self.first_name = data['first_name']
+        self.last_name = data['last_name']
+        self.age = data['age']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM dojos;"
+        query = "SELECT * FROM ninjas;"
         results = connectToMySQL('dojos_and_ninjas_schema').query_db(query)
         ninja = []
         for u in results:

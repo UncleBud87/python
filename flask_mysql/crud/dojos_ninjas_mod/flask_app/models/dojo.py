@@ -8,6 +8,7 @@ class Dojo:
         self.name = data['name']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.ninjas = []
 
     @classmethod
     def get_dojos_with_ninjas( cls , data ):
@@ -40,7 +41,6 @@ class Dojo:
     def save(cls, data):
         query = "INSERT INTO dojos (name) VALUES (%(name)s);"
         result = connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
-        return result
 
     @classmethod
     def get_one(cls,data):

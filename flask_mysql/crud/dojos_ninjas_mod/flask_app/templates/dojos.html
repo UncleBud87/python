@@ -25,9 +25,11 @@
             <h1>All Dojos</h1>
             {% for dojo in dojos %}
             <TAble class="table table-borderless">
+                <form action="/dojo/ninjas" method="post"></form>
                 <tr>
-                    <td><a href="">{{dojo.name}}</a></td>
+                    <td class="breadcrumb">{{dojo.name}}</td>
                 </tr>
+                </form>
             </TAble>
             {% endfor %}
             <a href="">Add Ninja</a>

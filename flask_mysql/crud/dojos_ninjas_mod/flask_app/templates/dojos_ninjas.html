@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <h1>{{ dojos.name }} Ninjas</h1>
+        <h1>{{ dojo.name }} Ninjas</h1>
 
         <table class="table table-bordered">
             <thead>
@@ -24,12 +24,14 @@
                 </tr>
             </thead>
             <tbody>
+                {% for ninja in ninjas %}
                 <tr>
                     <th scope="row">{{ dojo.id }}</th>
                     <td>{{ ninja.first_name }}</td>
                     <td>{{ ninja.last_name }}</td>
                     <td>{{ ninja.age }}</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

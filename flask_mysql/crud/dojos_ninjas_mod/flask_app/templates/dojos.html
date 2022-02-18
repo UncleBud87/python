@@ -25,7 +25,7 @@
             <h1>All Dojos</h1>
             {% for dojo in dojos %}
             <TAble class="table table-borderless">
-                <form action="/dojo/show/{{id}}" method="post">
+                <form action="/dojo/show/{{dojo.id}}">
                 <tr>
                     <td><input type="submit" name="{{dojo.name}}"></td>
                 </tr>

@@ -8,9 +8,9 @@ from dojos_ninjas_mod.models.dojo import Dojo
 
 @app.route("/")
 def index():
-    return redirect('/dojos')
+    return redirect('/index')
 
 
-@app.route("/dojos")
+@app.route("/index")
 def dojo():
-    return render_template("dojos.html", dojo=Dojo.get_all())
+    return render_template("index.html", dojo=Dojo.get_all())

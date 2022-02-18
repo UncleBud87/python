@@ -6,7 +6,7 @@ x.split('')
 
 function reverseString(str) {
     let output = "";
-    for (i = str.length -1 ; i>= 0; i--) {
+    for (i = str ; i>= 0; i--) {
         output += str[i]
 }
 

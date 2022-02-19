@@ -13,28 +13,33 @@
 <body>
     <div class="container">
         <h1>New Ninja</h1>
-        {% for ninja in ninjas %}
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">Dojo:</label>
-            <select class="form-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="{{ dojo.id }}">{{dojo.name}}</option>
-            </select>
-        </div>
-        <div class="input-group">
-            <span class="input-group-text">First Name:</span>
-            <input type="text" aria-label="Name" class="form-control">
-        </div>
-        <div class="input-group">
-            <span class="input-group-text">Last Name:</span>
-            <input type="text" aria-label="Name" class="form-control">
-        </div>
-        <div class="input-group">
-            <span class="input-group-text">age:</span>
-            <input type="text" aria-label="Name" class="form-control">
-        </div>
-        <button type="button" class="btn btn-lg btn-primary" disabled>Create</button>
-        {% endfor %}
+
+        <form action="/create/ninja" method="post">
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Dojo:</label>
+                
+                <select class="form-select" name="dojo_id" id="inputGroupSelect01">
+                    {% for dojo in dojos %}
+                    <option value="{{dojo.id}}">{{dojo.name}}</option>
+                    {% endfor %}
+                </select>
+                
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">First Name:</span>
+                <input type="text" aria-label="Name" name="first_name" class="form-control">
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Last Name:</span>
+                <input type="text" aria-label="Name" name="last_name" class="form-control">
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">age:</span>
+                <input type="text" aria-label="Name" name="age" class="form-control">
+            </div>
+            <input type="submit" class="btn btn-lg btn-primary"></input>
+        </form>
+
     </div>
 </body>
 

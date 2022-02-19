@@ -20,13 +20,12 @@
                     <th scope="col">#</th>
                     <th scope="col">First</th>
                     <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Age</th>
                 </tr>
             </thead>
             <tbody>
                 {% for ninja in ninjas %}
                 <tr>
-                    <th scope="row">{{ dojo.id }}</th>
                     <td>{{ ninja.first_name }}</td>
                     <td>{{ ninja.last_name }}</td>
                     <td>{{ ninja.age }}</td>
@@ -34,6 +33,9 @@
                 {% endfor %}
             </tbody>
         </table>
+        <a href="/dojos">home</a>
+        <form action="/new/ninja" input="submit"> Add Ninja
+        </form>
     </div>
 </body>
 

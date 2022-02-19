@@ -1,7 +1,6 @@
+
 from flask import render_template,redirect,request,session
-
 from users_crud_mod import app
-
 from users_crud_mod.models.user import User
 
 @app.route("/")

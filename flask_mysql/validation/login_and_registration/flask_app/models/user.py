@@ -1,4 +1,4 @@
-from pickle import FALSE
+
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 
@@ -13,43 +13,49 @@ class User:
         self.password = data['password']
         self.confirm_password = data['confirm_password']
 
-    @staticmethod
-    def validate_user(user):
-        is_valid = True # we assume this is true
+        self.account = []
 
-        if len(user['first_name']) < 2:
-            flash("First Name must be at least 2 characters.")
-            is_valid = False
-        if len(user['last_name']) < 2:
-            flash("Last Name must be at least 2 characters.")
-            is_valid = False
-        if User.get_by_email(user) != False:
-            flash('Email already in use', 'error')
-            is_valid = False
-        if user['password'] != user['confirm_password']:
-            flash("Password does not match.")
-            is_valid = False
-        return is_valid
+    @classmethod
+    def save(cls, data):
+        query = "INSERT INTO user_registration (first_name, last_name, email, password) VALUES (%(first_name)s,%(last_name)s,%(email)s,%(password)s;"
+        return connectToMySQL('login_registration').query_db(query,data)
+
+    @classmethod
+    def get_by_id(cls,data):
+        query = "select * FROM user_registration WHERE id = %(id)s"
+        return connectToMySQL('login_registration').query_db(query,data)
 
     @classmethod
     def get_by_email(cls,data):
         query = "SELECT * FROM user_registration WHERE email = %(email)s;"
-        result = connectToMySQL('user_registration_schema').query_db(query,data)
+        result = connectToMySQL('login_registration').query_db(query,data)
+
         if len(result) < 1:
             return False
         return cls(result[0])
 
-    @classmethod
-    def get_all(cls):
-        query = "SELECT * FROM users;"
-        results = connectToMySQL('users_schema').query_db(query)
-        users = []
-        for u in results:
-            users.append( cls(u) )
-        return users
+    @staticmethod
+    def validate_account(account):
+        is_valid = True
+        if len(account['first_name']) < 2:
+            flash("First Name must be atleast 2 characters", 'error')
+            is_valid = False
+        if len(account['last_name']) < 2:
+            flash("Last Name must be atleast 2 characters", 'error')
+            is_valid = False
+        if not EMAIL_REGEX.match(account['email']):
+            flash('Invalid email address!', 'error')
+            is_valid = False
+        if Regisrtr.get_by_email(account) != False :
+            flash('Email already in use', 'error')
+            is_valid = False
+        if not PASSWORD_REGEX.match(account['password']):
+            flash('Password cannot be empty and needs atleast one uppercase letter, one lowercase letter, and one number(MIN of 8 characters ) ', 'error')
+            is_valid = False
+        if account['password'] != account['confirm_password']:
+            flash("Passwords do not match!", 'error')
+            is_valid = False
+        
 
-    @classmethod
-    def save(cls, data):
-        query = "INSERT INTO user_registration (first_name,last_name,email,password,confirm_password) VALUES (%(first_name)s,%(last_name)s,%(email)s,%(password)s,%(confirm_password)s);"
-        result = connectToMySQL('users_registration_schema').query_db(query,data)
-        return result
+        return is_valid
+

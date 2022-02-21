@@ -1,5 +1,7 @@
+from pickle import FALSE
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+
 
 class User:
     def __init__(self, data):
@@ -15,19 +17,27 @@ class User:
     def validate_user(user):
         is_valid = True # we assume this is true
 
-        if len(user['first_name']) < 3:
-            flash("First Name must be at least 3 characters.")
+        if len(user['first_name']) < 2:
+            flash("First Name must be at least 2 characters.")
             is_valid = False
-        if len(user['last_name']) < 3:
-            flash("Last Name must be at least 3 characters.")
+        if len(user['last_name']) < 2:
+            flash("Last Name must be at least 2 characters.")
             is_valid = False
-        if len(user['email']) < 8:
-            flash("email must me longer than 8 characters.")
+        if User.get_by_email(user) != False:
+            flash('Email already in use', 'error')
             is_valid = False
         if user['password'] != user['confirm_password']:
             flash("Password does not match.")
             is_valid = False
         return is_valid
+
+    @classmethod
+    def get_by_email(cls,data):
+        query = "SELECT * FROM user_registration WHERE email = %(email)s;"
+        result = connectToMySQL('user_registration_schema').query_db(query,data)
+        if len(result) < 1:
+            return False
+        return cls(result[0])
 
     @classmethod
     def get_all(cls):

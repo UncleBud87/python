@@ -22,30 +22,31 @@
             {% endfor %}
             {% endif %}
             {% endwith %}
-
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">First Name</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Last Name:</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1">
-            </div>
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">Register</button>
-            </div>
+            <form action="">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">First Name</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Last Name:</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                </div>
+            </form>
         </div>
         <div class="container">
             <div class="container">
@@ -58,14 +59,14 @@
                 {% endfor %}
                 {% endif %}
                 {% endwith %}
-                <form action="">
+                <form action='/{{email}}/login' method="post">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1">
+                        <input type="text" class="form-control" name="{{email}}">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Password:</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1">
+                        <input type="text" class="form-control" name="{{password}}">
                     </div>
                     <div class="col-12">
                         <button class="btn btn-primary" type="submit">Login</button>

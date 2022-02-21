@@ -20,8 +20,31 @@ def save():
     User.save(request.form)
     return redirect('/welcome')
 
+@app.route('/create', methods=['POST'])
+def create_account():
+    if not User.validate_account(request.form):
+        return redirect('/')
 
-@app.route('/login', methods=['GET', 'POST'])
+    pw_hash = bcrypt.generate_password_has(request.form['password'])
+    data = {
+        "first_name": request.form['first_name'],
+        'last_name': request.form['last_name'],
+        'email': request.form['email'],
+        'password': pw_hash
+    }
+    account_in_db = User.get_by_email(request.form['email'])
+    if account_in_db:
+        flash('Email is already in use','error')
+        return redirect('/')
+    
+    account_id = User.save(data)
+    print('+'*20)
+    print(account_id)
+    session['first_name'] = request.form['first_name']
+    session['login'] = True
+    return redirect('/home')
+
+@app.route('/{{email}}/login', methods=['GET', 'POST'])
 def new_login():
     error = None
     if request.method == 'POST':

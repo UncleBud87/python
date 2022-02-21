@@ -24,7 +24,22 @@ class User:
         if len(user['email']) < 8:
             flash("email must me longer than 8 characters.")
             is_valid = False
-        if len(user['password']) != len(user['confirm_password']):
+        if user['password'] != user['confirm_password']:
             flash("Password does not match.")
             is_valid = False
         return is_valid
+
+    @classmethod
+    def get_all(cls):
+        query = "SELECT * FROM users;"
+        results = connectToMySQL('users_schema').query_db(query)
+        users = []
+        for u in results:
+            users.append( cls(u) )
+        return users
+
+    @classmethod
+    def save(cls, data):
+        query = "INSERT INTO user_registration (first_name,last_name,email,password,confirm_password) VALUES (%(first_name)s,%(last_name)s,%(email)s,%(password)s,%(confirm_password)s);"
+        result = connectToMySQL('users_registration_schema').query_db(query,data)
+        return result

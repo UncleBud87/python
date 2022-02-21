@@ -9,10 +9,20 @@ def index():
 
 @app.route("/login")
 def login():
-    return render_template("index.html", users=User.get_all())
+    return render_template("index.html")
+
+@app.route('/welcome')
+def welcome():
+    return render_template('welcome.html')
+
+@app.route("/new/registration")
+def save():
+    User.save(request.form)
+    return redirect('/welcome')
+
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+def new_login():
     error = None
     if request.method == 'POST':
         if request.form['email'] != 'email' or \
@@ -21,4 +31,4 @@ def login():
         else:
             flash('You were successfully logged in')
             return redirect(url_for('index'))
-    return render_template('login.html', error=error)
+    return render_template('welcome.html', error=error)

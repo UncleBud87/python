@@ -9,14 +9,14 @@ def index():
 
 @app.route("/login")
 def login():
-    return render_template("login.html", users=User.get_all())
+    return render_template("index.html", users=User.get_all())
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or \
-                request.form['password'] != 'secret':
+        if request.form['email'] != 'email' or \
+                request.form['password'] != 'password':
             error = 'Invalid credentials'
         else:
             flash('You were successfully logged in')

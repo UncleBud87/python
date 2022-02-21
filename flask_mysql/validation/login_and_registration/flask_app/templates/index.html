@@ -14,11 +14,15 @@
     <div class="container d-flex">
         <div class="container">
             <h1>Register</h1>
-            {% extends "layout.html" %}
-            {% block body %}
-            <h1>Overview</h1>
-            <p>Do you want to <a href="{{ url_for('login') }}">log in?</a>
-                {% endblock %}
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">First Name</label>
                 <input type="email" class="form-control" id="exampleFormControlInput1">
@@ -46,11 +50,15 @@
         <div class="container">
             <div class="container">
                 <h1>Login</h1>
-                {% extends "layout.html" %}
-                {% block body %}
-                <h1>Overview</h1>
-                <p>Do you want to <a href="{{ url_for('login') }}">log in?</a>
-                    {% endblock %}
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email:</label>
                     <input type="email" class="form-control" id="exampleFormControlInput1">

@@ -15,24 +15,22 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        self.confirm_password = data['confirm_password']
-
         self.account = []
 
     @classmethod
     def save(cls, data):
-        query = "INSERT INTO user_registration (first_name, last_name, email, password) VALUES (%(first_name)s,%(last_name)s,%(email)s,%(password)s;"
-        return connectToMySQL('login_registration').query_db(query,data)
+        query = "INSERT INTO user_registration (first_name, last_name, email, password) VALUES (%(first_name)s,%(last_name)s,%(email)s,%(password)s);"
+        return connectToMySQL('user_registration_schema').query_db(query,data)
 
     @classmethod
     def get_by_id(cls,data):
         query = "select * FROM user_registration WHERE id = %(id)s"
-        return connectToMySQL('login_registration').query_db(query,data)
+        return connectToMySQL('user_registration_schema').query_db(query,data)
 
     @classmethod
     def get_by_email(cls,data):
         query = "SELECT * FROM user_registration WHERE email = %(email)s;"
-        result = connectToMySQL('login_registration').query_db(query,data)
+        result = connectToMySQL('user_registration_schema').query_db(query,data)
 
         if len(result) < 1:
             return False
@@ -50,7 +48,7 @@ class User:
         if not EMAIL_REGEX.match(account['email']):
             flash('Invalid email address!', 'error')
             is_valid = False
-        if Regisrtr.get_by_email(account) != False :
+        if User.get_by_email(account) != False :
             flash('Email already in use', 'error')
             is_valid = False
         if not PASSWORD_REGEX.match(account['password']):
@@ -58,8 +56,6 @@ class User:
             is_valid = False
         if account['password'] != account['confirm_password']:
             flash("Passwords do not match!", 'error')
-            is_valid = False
-        
-
+            is_valid = False        
         return is_valid
 

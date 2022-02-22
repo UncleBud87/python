@@ -16,11 +16,11 @@
             <h1>Register</h1>
             <form action="/new_user" method="post">
                 {% with errors = get_flashed_messages(category_filter=["error"]) %}
-                    {% if errors %}
-                        {% for message in errors %}
-                            <p>{{message}}</p>
-                        {% endfor %}
-                    {% endif %}
+                {% if errors %}
+                {% for message in errors %}
+                <h4>{{message}}</h4>
+                {% endfor %}
+                {% endif %}
                 {% endwith %}
                 <div class="mb-3">
                     <label class="form-label">First Name</label>
@@ -49,22 +49,22 @@
         </div>
         <div class="container">
             <div class="container">
-                <h1>Login</h1>
-                {% with messages = get_flashed_messages() %}
-                    {% if bad %}
-                        {% for messags in bad %}
-                            <p>{{message}}</p>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-                <form action='/login' method="get, post">
+                <form action="/login" method="post">
+                    <h1>Login</h1>
+                    {% with bad = get_flashed_messages(category_filter=["bad"]) %}
+                        {% if bad %}
+                            {% for message in bad %}
+                                <h4>{{message}}</h4>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                     <div class="mb-3">
                         <label class="form-label">Email:</label>
                         <input type="text" class="form-control" name="email">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password:</label>
-                        <input type="text" class="form-control" name="password">
+                        <input type="password" class="form-control" name="password">
                     </div>
                     <div class="col-12">
                         <button class="btn btn-primary" type="submit">Login</button>

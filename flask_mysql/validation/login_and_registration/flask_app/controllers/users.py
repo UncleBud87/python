@@ -42,7 +42,7 @@ def login():
     if not account_in_db:
         flash('Invalid Email/Password', 'bad')
         return redirect('/')
-    if not bcrypt.check_password_has(account_in_db.password,request.form['password']):
+    if not bcrypt.check_password_hash(account_in_db.password,request.form['password']):
         flash("Invalid Email/Password", 'bad')
         return redirect('/')
     session['first_name'] = account_in_db.first_name

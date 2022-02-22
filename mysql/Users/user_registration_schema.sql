@@ -1,1 +1,1 @@
-select * from user_registration
+select * from users

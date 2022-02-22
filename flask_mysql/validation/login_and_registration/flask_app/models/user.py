@@ -31,7 +31,6 @@ class User:
     def get_by_email(cls,data):
         query = "SELECT * FROM user_registration WHERE email = %(email)s;"
         result = connectToMySQL('user_registration_schema').query_db(query,data)
-
         if len(result) < 1:
             return False
         return cls(result[0])
@@ -58,4 +57,3 @@ class User:
             flash("Passwords do not match!", 'error')
             is_valid = False        
         return is_valid
-

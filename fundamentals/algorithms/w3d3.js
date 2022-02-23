@@ -27,6 +27,8 @@ class SinglyLinkedList {
         }
     }
 
+    
+
     addToTail(value) {
         let new_node = new ListNode(value);
 
@@ -62,7 +64,17 @@ class SinglyLinkedList {
     contains(value) {
         // returns true if the linked list contains a node with the given value
         // false otherwise
-    }
+            let runner = this.head;
+    
+            while (runner != null) {
+                if (runner.value == value) {
+                    return true;
+                }
+
+                runner = runner.next;
+            }
+            return false;
+        }
 }
 
 var new_sll = new SinglyLinkedList();

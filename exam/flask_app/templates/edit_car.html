@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Edit {{car.model}}</h1> <a href="/home">Dashboard</a> <a href="/user/logout">Logout</a></h1>
+
+    {% with messages = get_flashed_messages(category_filter=['car']) %}
+    {% if messages %}
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <form action="/cars/{{car.id}}/update" method="POST"><br>
+        Price: <input type="number" name="car_price" value="{{car.price}}">
+        Model: <input type="text" name="car_model" value="{{car.model}}"><br>
+        Make: <input name="car_make">{{car.make}</input><br>
+        Year: <input type="number" name="car_year" value="{{car.year}}"></input><br>
+        Description: <textarea name="car_description">{{car.description}}</textarea><br>
+        <input type="submit">
+    </form>
+</body>
+
+</html>

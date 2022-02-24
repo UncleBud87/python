@@ -9,5 +9,40 @@
 <body>
     <h1>Welcome {{session['user_first_name']}}!</h1><a href="/user/logout">Logout</a>
 
+    <table>
+        <thead>
+            <th>
+                Model
+            </th>
+            <th>
+                Year
+            </th>
+            <th>
+                Seller
+            </th>
+            <th>
+                Actions
+            </th>
+        </thead>
+        {% for car in cars %}
+        <tr>
+            <td>
+                {{car.model}}
+            </td>
+            <td>
+                {{car.year}}
+            </td>
+            <td>
+                {{car.seller}}
+            </td>
+            <td>
+                <a href="/cars/<int:recipe_id>">View Instructions</a>{% if car.user.id == session['user_id'] %} <a href="/cars/{{car.id}}/edit">edit</a> <a href="/cars/{{car.id}}/delete">delete</a>{% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </table>
+
+        <a href="/cars/new">Add a car</a>
+
 </body>
 </html>

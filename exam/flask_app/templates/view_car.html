@@ -8,11 +8,14 @@
 </head>
 <body>
     <h1>Welcome {{session['user_first_name']}}! </h1><a href="/home">Dashboard</a> <a href="/user/logout">Logout</a>
-    <h2>{{recipe.name}}</h2>
+        
+        <h2>{{car.price}} </h2>
         <p>
-        Description: {{recipe.description}} <br>
-        Under 30 minutes: {{recipe.under_30_min}} <br>
-        instructions: {{recipe.instructions}} <br>
-        Date Made: {{recipe.date_made}}</p>
+        Model: {{recipe.under_30_min}} <br>
+        Make: {{recipe.instructions}} <br>
+        Year: {{recipe.date_made}} <br>
+        Description: {{car.description}} <br>
+        Seller: {{}}    
+    </p>
 </body>
 </html>

@@ -33,7 +33,7 @@
                 {{car.year}}
             </td>
             <td>
-                {{car.user_id}}
+                {{car.users_id}}
             </td>
             <td>
                 {% if car.user.id != session['user_id'] %}<a href="/cars/{{car.id}}">View</a> {% endif %} {% if car.user.id == session['user_id'] %} <a href="/cars/{{car.id}}/edit">edit</a> <a href="/cars/{{car.id}}/delete">delete</a>{% endif %}

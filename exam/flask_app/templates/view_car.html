@@ -15,7 +15,7 @@
         Model: {{car.model}} <br>
         Year: {{car.year}} <br>
         Description: {{car.description}} <br>
-        Seller: {{car.first_name}} {{car.last_name}}
+        Seller: {{users_id}}
     </p>
     {% if car.user.id != session['user_id'] %}<a href="/cars/{{car.id}}/delete">Purchase</a> {% endif %}
 </body>

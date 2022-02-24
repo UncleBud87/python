@@ -1,59 +1,72 @@
-from winreg import QueryInfoKey
 from flask_app.config.mysqlconnection import connectToMySQL
+
 from flask import flash
-import re
 
-EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-PASSWORD_REGEX = re.compile(r'^(?=.*\d)(?=.*[A-Z])[a-zA-Z\d]{8,45}$')
+import re # from pattern validation on learn platform
 
-
-class User:
+class User():
     def __init__(self, data):
         self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
-        self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        self.account = []
+        self.created_at = data['created_at'] # not actually needed unless its going to be called upon
+        self.updated_at = data['updated_at'] # not actually needed unless its going to be called upon
 
     @classmethod
-    def save(cls, data):
-        query = "INSERT INTO user_registration (first_name, last_name, email, password) VALUES (%(first_name)s,%(last_name)s,%(email)s,%(password)s);"
-        return connectToMySQL('user_registration_schema').query_db(query,data)
+    def create_new_user(cls,data):
+        query = 'INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);'
+
+        result = connectToMySQL('recipes_schema').query_db(query, data)
+
+        return result
 
     @classmethod
-    def get_by_id(cls,data):
-        query = "select * FROM user_registration WHERE id = %(id)s"
-        return connectToMySQL('user_registration_schema').query_db(query,data)
+    def get_user_by_email(cls,data):
 
-    @classmethod
-    def get_by_email(cls,data):
-        query = "SELECT * FROM user_registration WHERE email = %(email)s;"
-        result = connectToMySQL('user_registration_schema').query_db(query,data)
-        if len(result) < 1:
+        query = "SELECT * FROM users WHERE email = %(email)s;"
+
+        results = connectToMySQL('recipes_schema').query_db(query, data)
+
+        if len(results)  == 0:
             return False
-        return cls(result[0])
+
+        else:
+            return User(results[0])
 
     @staticmethod
-    def validate_account(account):
+    def validate_new_user(data): # does not need class
         is_valid = True
-        if len(account['first_name']) < 2:
-            flash("First Name must be atleast 2 characters", 'error')
+
+        email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+
+        #first_name 3-50 characters
+        if len(data['first_name']) < 3 or len(data ['first_name']) >50:
             is_valid = False
-        if len(account['last_name']) < 2:
-            flash("Last Name must be atleast 2 characters", 'error')
+            flash('First name should be 3 to 50 characters long', 'register')
+
+        if len(data['last_name']) < 3 or len(data ['last_name']) >50:
             is_valid = False
-        if not EMAIL_REGEX.match(account['email']):
-            flash('Invalid email address!', 'error')
+            flash('Last name should be 3 to 50 characters long', 'register')
+
+        #email is not in use
+        if User.get_user_by_email(data):
             is_valid = False
-        if User.get_by_email(account) != False :
-            flash('Email already in use', 'error')
+            flash('Email already in use', 'register')
+        #email is valid
+        if not email_regex.match(data['email']):
             is_valid = False
-        if not PASSWORD_REGEX.match(account['password']):
-            flash('Password cannot be empty and needs atleast one uppercase letter, one lowercase letter, and one number(MIN of 8 characters ) ', 'error')
+            flash('Email address not correctly formatted.', 'register')
+
+
+        #password is of minimum length
+        if len(data['password']) < 8:
             is_valid = False
-        if account['password'] != account['confirm_password']:
-            flash("Passwords do not match!", 'error')
-            is_valid = False        
+            flash('Password should be atleast eight characters long.', 'register')
+        #password and confirm password match
+        if data['password'] != data['confirm_password']:
+            is_valid = False
+            flash('Passwords do not match.', 'register')
+
         return is_valid

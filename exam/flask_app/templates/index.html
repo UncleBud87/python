@@ -11,68 +11,54 @@
 </head>
 
 <body>
-    <div class="container d-flex">
+
+    <div class="d-flex">
+
         <div class="container">
+
             <h1>Register</h1>
-            <form action="/new_user" method="post">
-                {% with errors = get_flashed_messages(category_filter=["error"]) %}
-                {% if errors %}
-                {% for message in errors %}
-                <h4>{{message}}</h4>
-                {% endfor %}
+
+            {% with messages = get_flashed_messages(category_filter=['register']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                <p>{{message}}</p>
+                    {% endfor %}
                 {% endif %}
-                {% endwith %}
-                <div class="mb-3">
-                    <label class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="first_name">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Last Name:</label>
-                    <input type="text" class="form-control" name="last_name">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Email address</label>
-                    <input type="text" class="form-control" name="email">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="text" class="form-control" name="password">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Confirm Password</label>
-                    <input type="text" class="form-control" name="confirm_password">
-                </div>
-                <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Register</button>
-                </div>
+            {% endwith %}
+
+            <form action="/user/register" method="post">
+                First Name: <input type="text" name="first_name"><br>
+                Last Name: <input type="text" name="last_name"><br>
+                Email: <input type="email" name="email"><br>
+                Password: <input type="password" name="password"><br>
+                Confirm Password: <input type="password" name="confirm_password"><br>
+                <input type="submit">
             </form>
+
         </div>
+
         <div class="container">
-            <div class="container">
-                <form action="/login" method="post">
-                    <h1>Login</h1>
-                    {% with bad = get_flashed_messages(category_filter=["bad"]) %}
-                        {% if bad %}
-                            {% for message in bad %}
-                                <h4>{{message}}</h4>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-                    <div class="mb-3">
-                        <label class="form-label">Email:</label>
-                        <input type="text" class="form-control" name="email">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password:</label>
-                        <input type="password" class="form-control" name="password">
-                    </div>
-                    <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Login</button>
-                    </div>
-                </form>
-            </div>
+
+            <h1>Login</h1>
+
+            {% with messages = get_flashed_messages(category_filter=['login']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form action="/user/login" method="post">
+                Email: <input type="email" name="email"><br>
+                Password: <input type="password" name="password"><br>
+                <input type="submit">
+            </form>
+
         </div>
+
     </div>
+
 </body>
 
 </html>

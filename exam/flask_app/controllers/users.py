@@ -1,56 +1,63 @@
+
 from flask_app import app
-from flask import render_template,redirect,request,session, flash
+
+from flask import render_template, redirect, request, session, flash
+
 from flask_app.models.user import User
+
 from flask_bcrypt import Bcrypt
+
 bcrypt = Bcrypt(app)
 
-
-@app.route("/")
+@app.route('/')
 def index():
-    return render_template('index.html')
 
-@app.route("/home")
-def home_page():
-    return render_template("home.html",first_name = session['first_name'])
+    return render_template("index.html")
 
-@app.route('/new_user', methods=['POST'])
-def new_user():
-    if not User.validate_account(request.form):
+@app.route('/user/register', methods=['POST'])
+def register_user():
+
+    if not User.validate_new_user(request.form):
+        print('validation fails')
         return redirect('/')
 
-    pw_hash = bcrypt.generate_password_hash(request.form['password'])
-    data = {
-        "first_name": request.form['first_name'],
-        "last_name": request.form['last_name'],
-        "email": request.form['email'],
-        "password": pw_hash
-    }
+    else:
+        print('validation is good')
+        data = {
+            'first_name' : request.form['first_name'],
+            'last_name' : request.form['last_name'],
+            'email' : request.form['email'],
+            'password' : bcrypt.generate_password_hash(request.form['password'])
+        }
+        print(data)
+        User.create_new_user(data)
+        flash(' Registration Complete', 'register')
+        return redirect('/')
 
-    account_id = User.save(data)
-    print('+'*20)
-    print(account_id)
-    session['first_name'] = request.form['first_name']
-    session['login'] = True
+@app.route('/user/login', methods=['POST'])
+def user_login():
+    #determine if user exist
+
+    user = User.get_user_by_email(request.form)
+
+    if not user:
+        flash('Email is not registered.', 'login')
+        return redirect('/')
+    #check password agains db
+    if not bcrypt.check_password_hash(user.password, request.form['password']):
+        flash('Password is Incorrect', 'login')
+        return redirect('/')
+    #user is logged in
+
+    session['user_id'] = user.id
+    session['user_email'] = user.email
+    session['user_first_name'] = user.first_name
+    #use only information that will be called on during session
+
     return redirect('/home')
 
-
-@app.route("/login", methods=['POST'])
-def login():
-    data = {'email': request.form['email']}
-    account_in_db = User.get_by_email(data)
-
-    if not account_in_db:
-        flash('Invalid Email/Password', 'bad')
-        return redirect('/')
-    if not bcrypt.check_password_hash(account_in_db.password,request.form['password']):
-        flash("Invalid Email/Password", 'bad')
-        return redirect('/')
-    session['first_name'] = account_in_db.first_name
-    session['login'] = True
-
-    return redirect('/home')
-
-@app.route('/logout', methods=['POST'])
+@app.route('/user/logout')
 def logout():
     session.clear()
+    flash('You are now logged out', 'login')
     return redirect('/')

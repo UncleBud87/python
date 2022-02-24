@@ -116,7 +116,11 @@ class Recipe():
             is_valid = False
             flash('Recipe instructions should be between 1 and 500 characters long', 'recipe')
 
-        if len(data['recipe_date_made']) == '':
+        if 'recipe_under_30_min' not in data:
+            is_valid = False
+            flash('Choose yes or no', 'recipe')
+
+        if data['recipe_date_made'] == '':
             is_valid = False
             flash('Date made is required.', 'recipe')
 

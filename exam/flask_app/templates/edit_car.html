@@ -20,10 +20,10 @@
     {% endwith %}
 
     <form action="/cars/{{car.id}}/update" method="POST"><br>
-        Price: <input type="number" name="car_price" value="{{car.price}}">
+        Price: <input type="number" name="car_price" value="{{car.price}}" min="1"><br>
+        Make: <input name="car_make" value="{{car.make}}"></input><br>
         Model: <input type="text" name="car_model" value="{{car.model}}"><br>
-        Make: <input name="car_make">{{car.make}</input><br>
-        Year: <input type="number" name="car_year" value="{{car.year}}"></input><br>
+        Year: <input type="number" name="car_year" value="{{car.year}}" min="1"></input><br>
         Description: <textarea name="car_description">{{car.description}}</textarea><br>
         <input type="submit">
     </form>

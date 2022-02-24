@@ -56,7 +56,9 @@ class Car():
                 'email': item['email'],
                 'password': item['password'],
                 'created_at': item['created_at'],
-                'updated_at': item['updated_at']
+                'updated_at': item['updated_at'],
+                'first_name': item['first_name'],
+                'last_name': item['last_name']
             }
 
             new_car.user = User(user_data)
@@ -110,11 +112,11 @@ class Car():
             is_valid = False
             flash('Car description should be between 1 and 250 characters long', 'car')
 
-        if 'car_price' not in data:
+        if len(data['car_price']) < 1:
             is_valid = False
             flash('Choose a price greater than 0', 'car')
         
-        if 'car_year' not in data:
+        if len(data['car_year']) < 1:
             is_valid = False
             flash('Choose a year greater than 0', 'car')
 

@@ -33,10 +33,10 @@
                 {{car.year}}
             </td>
             <td>
-                {{car.seller}}
+                {{car.user_id}}
             </td>
             <td>
-                <a href="/cars/<int:recipe_id>">View Instructions</a>{% if car.user.id == session['user_id'] %} <a href="/cars/{{car.id}}/edit">edit</a> <a href="/cars/{{car.id}}/delete">delete</a>{% endif %}
+                {% if car.user.id != session['user_id'] %}<a href="/cars/{{car.id}}">View</a> {% endif %} {% if car.user.id == session['user_id'] %} <a href="/cars/{{car.id}}/edit">edit</a> <a href="/cars/{{car.id}}/delete">delete</a>{% endif %}
             </td>
         </tr>
         {% endfor %}

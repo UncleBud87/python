@@ -7,6 +7,21 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>Add New Recipe</h1> <a href="/recipes">Dashboard</a> <a href="/user/logout">Logout</a></h1>
+
+    {% with messages = get_flashed_messages(category_filter=['recipe']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+    <form action="/recipes/{{recipe.id}}/update" method="POST">
+        Name: <input type="text" name="recipe_name" value="{{recipe.name}}"> Date Made On: <input type="date" name="recipe_date_made" value="{{recipe.date_made}}"><br>
+        Description: <textarea name="recipe_description">{{recipe.description}}</textarea> Under 30 Min: <input type="radio" name="recipe_under_30_min" value="yes" checked>Yes</input><input type="radio" name="recipe_under_30_min" value="no">No</input><br>
+        Instructions: <textarea name="recipe_instructions">{{recipe.instructions}}</textarea><br>
+        <input type="submit">
+    </form>
 </body>
 </html>

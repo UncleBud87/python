@@ -1,3 +1,4 @@
+from unittest import result
 from flask_app.config.mysqlconnection import connectToMySQL
 
 from flask import flash
@@ -34,6 +35,15 @@ class Recipe():
         return result
 
     @classmethod
+    def update_recipe(cls, data):
+
+        query = 'UPDATE recipes SET name = %(recipe_name)s, date_made = %(recipe_date_made)s, description = %(recipe_description)s, instructions = %(recipe_instructions)s, under_30_min = %(recipe_under_30_min)s WHERE id = %(recipe_id)s;'
+
+        result = connectToMySQL('recipes_schema').query_db(query,data)
+
+        return result
+
+    @classmethod
     def get_all_recipes(cls):
 
         query = 'SELECT * FROM recipes JOIN users ON recipes.user_id = users.id;'
@@ -61,8 +71,37 @@ class Recipe():
 
         return recipes
 
+    @classmethod
+    def get_recipe_by_id(cls, data):
+
+        query = 'SELECT * FROM recipes JOIN users ON recipes.user_id = users.id WHERE recipes.id = %(id)s;'
+
+        result = connectToMySQL('recipes_schema').query_db(query,data)
+
+        recipe =  Recipe(result[0])
+
+        user_data = {
+                'id': result[0]['users.id'],
+                'first_name': result[0]['first_name'],
+                'last_name': result[0]['last_name'],
+                'email': result[0]['email'],
+                'password': result[0]['password'],
+                'created_at': result[0]['created_at'],
+                'updated_at': result[0]['updated_at']
+            }
+
+        recipe.user = User(user_data)
+
+        return recipe
+
+    @classmethod
+    def delete_recipe(cls,data):
+        query = 'DELETE FROM recipes WHERE id = %(id)s;'
+
+        result = connectToMySQL('recipes_schema').query_db(query,data)
+
     @staticmethod
-    def validate_new_recipe(data):
+    def validate_recipe(data):
         is_valid = True
 
         if len(data['recipe_name']) < 1 or len(data['recipe_name']) >100:

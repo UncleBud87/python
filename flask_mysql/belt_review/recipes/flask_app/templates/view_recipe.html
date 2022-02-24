@@ -7,6 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>Welcome {{session['user_first_name']}}! </h1><a href="/recipes">Dashboard</a> <a href="/user/logout">Logout</a>
+    <h2>{{recipe.name}}</h2>
+        <p>
+        Description: {{recipe.description}} <br>
+        Under 30 minutes: {{recipe.under_30_min}} <br>
+        instructions: {{recipe.instructions}} <br>
+        Date Made: {{recipe.date_made}}</p>
 </body>
 </html>

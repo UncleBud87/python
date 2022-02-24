@@ -5,6 +5,8 @@ from flask import render_template, redirect, request, session, flash
 
 from flask_app.models.user import User
 
+from flask_app.models.recipe import Recipe
+
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt(app)
@@ -51,18 +53,10 @@ def user_login():
 
     session['user_id'] = user.id
     session['user_email'] = user.email
+    session['user_first_name'] = user.first_name
     #use only information that will be called on during session
 
-    return redirect('/welcome')
-
-@app.route('/welcome')
-def welcome():
-
-    if not 'user_id' in session: #keeps from bypassing log in
-        flash('Please log in', 'login')
-        return redirect('/')
-
-    return render_template('welcome.html')
+    return redirect('/recipes')
 
 @app.route('/user/logout')
 def logout():

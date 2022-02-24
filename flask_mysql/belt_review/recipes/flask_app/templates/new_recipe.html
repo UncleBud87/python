@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add New Recipe</h1>
+
+    {% with messages = get_flashed_messages(category_filter=['recipe']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+    <form action="/recipes/create" method="POST">
+        Name: <input type="text" name="recipe_name"> Date Made On: <input type="date" name="recipe_date_made"><br>
+        Description: <textarea name="recipe_description"></textarea> Under 30 Min: <input type="radio" name="recipe_under_30_min" value="yes">Yes</input><input type="radio" name="recipe_under_30_min" value="no">No</input><br>
+        Instructions: <textarea name="recipe_instructions"></textarea><br>
+        <input type="submit">
+    </form>
+</body>
+</html>

@@ -1,59 +1,94 @@
 
-// bookIndex(input) -> input is an array of integers, in order
-// those integers represent pages in a book where a certain term is found
-// output is a string representing a listing of those pages in a book's index
-// an input of: [58, 104, 105, 106, 192, 194, 195, 196]
-// leads to an output of: "58, 104-106, 192, 194-196"
-// input: [1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 15, 17, 18]
-// output: "1-5, 8-12, 15, 17-18"
+// Greatest Common Factor
+// Given two integers, create recursiveGreatestCommonFactor(num1, num2) to recursively determine Greatest Common Factor (the largest integer dividing evenly into both). Greek mathematician Euclid demonstrated these facts:
+// 1) if num1 === num2, that number is the greatest common factor;
+// 2) if a>b, then you can remove b from a, which gets you closer to the GCF;
+// 3) if b>a, then you can remove a from b, which gets you closer to the GCF;
+// Second: rework facts #2 and #3 to reduce stack consumption and expand rGCF ’s reach. You should be able to compute rGCF(123456,987654) .
 
-// suggestion: break this into two parts, or maybe even two
-// functions - get your array of integers and turn it into an array
-// of strings, then turn that array of strings into a single string
-// [58, 104, 105, 106, 192, 194, 195, 196]
-// ["58", "104-106", "192", "194-196"]
-// "58, 104-106, 192, 194-196"
-// also a suggestion: remember that you can modify your for loop iterator
-// during your loop! you can add to or subtract from i at any point
-// also also: remember that loops can go within loops - while in for,
-// for in for, while in while, etc.
+// function recursiveGreatestCommonFactor(num1,num2){
+//     // your code here
+// }
+
+// console.log(recursiveGreatestCommonFactor(50,180)); // 10
+// console.log(recursiveGreatestCommonFactor(7,35)); // 7
+// console.log(recursiveGreatestCommonFactor(65,95)); // 5
+// console.log(recursiveGreatestCommonFactor(123456,987654)); // 6
+// console.log(recursiveGreatestCommonFactor(102,1000)); // 2
+// console.log(recursiveGreatestCommonFactor(7,13)); // 1
+
+// =====================================================
+// Instructor's solution
+// =====================================================
 
 
-
-function bookIndex(input) {
-    let output = ""
-    for (var i = 0; i < input.length; i++) {
-        let temp = i;
-        while (input[i] + 1 === input[i + 1]) {
-            i++;
-        }
-        if (temp == i) {
-            output += input[temp];
-        }
-        else {
-            output += input[temp] + '-' + input[i];
-        }
-        if (i != input.length - 1) {
-            output += ','
-        }
+function recursiveGreatestCommonFactor(num1,num2){
+    console.log(num1 + " " + num2)
+    if (num1 > num2) {
+        return recursiveGreatestCommonFactor(num1-num2, num2);
+    } else if (num2 > num1) {
+        return recursiveGreatestCommonFactor(num1, num2-num1);
     }
-    return output
+    else {
+        return num1
+    }
 }
 
-// function bookIndex(input) {
-//     // do some stuff here
-//     return (buildString(array_of_strings));
-// }
+// console.log(recursiveGreatestCommonFactor(50,180)); // 10
+// console.log(recursiveGreatestCommonFactor(7,35)); // 7
+// console.log(recursiveGreatestCommonFactor(65,95)); // 5
+// console.log(recursiveGreatestCommonFactor(123456,987654)); // 6
+// console.log(recursiveGreatestCommonFactor(102,1000)); // 2
+// console.log(recursiveGreatestCommonFactor(7,13)); // 1
 
-// function buildString(input) {
-//     // turns input into a string to return
-// }
+// ======================================
+// Student Solutions
+// ======================================
 
-console.log(bookIndex([1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 15, 17, 18]));
-// returns "1-5, 8-12, 15, 17-18"
-console.log(bookIndex([1, 2, 3, 4, 16, 18, 21, 22, 23, 24])) // returns "1-4, 16, 18, 21-24"
-console.log(bookIndex([332, 476])) // returns "332, 476"
-console.log(bookIndex([7, 8, 9, 10, 11])) // returns "7-11"
-console.log(bookIndex([2, 7, 8, 9, 10, 11])) // returns "2, 7-11"
-console.log(bookIndex([7, 8, 9, 10, 11, 23])) // returns "7-11, 23"
+function rGCF(num1,num2){
+    console.log(num1, num2);
+    // if b is equal to 0 we return a
+    if (num2 == 0) {
+        return num1;
+    }
+    // does the math
+    return rGCF(num2, num1 % num2);
+}
+// console.log(rGCF(50,180)); // 10
+// console.log("=================="); // 10
+// console.log(rGCF(7,35)); // 7
+// console.log(rGCF(65,95)); // 5
+console.log(rGCF(123456,987654));
+// console.log(rGCF(102,103)); // 1
+// console.log(rGCF(7,13)); // 1
+
+// ======================================
+
+function recursiveGreatestCommonFactor(num1,num2) {
+    if(num1 % num2 != 0){
+        console.log(num2);
+        return recursiveGreatestCommonFactor(num2, num1 % num2);
+    }
+    return num2;
+}
+
+// ======================================
+
+function recursiveGreatestCommonFactor(num1, num2){
+    var a = num1;
+    var b = num2;
+    if (a === b){
+        return a;
+    }    
+
+    else if (a > b){
+        a = a-b
+        return recursiveGreatestCommonFactor(a, b);
+    }
+
+    else {
+        b = b-a
+        return recursiveGreatestCommonFactor(a, b);
+    }
+} 
 

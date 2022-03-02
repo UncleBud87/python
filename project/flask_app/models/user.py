@@ -18,7 +18,7 @@ class User():
     def create_new_user(cls,data):
         query = 'INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);'
 
-        result = connectToMySQL('recipes_schema').query_db(query, data)
+        result = connectToMySQL('user_schema').query_db(query, data)
 
         return result
 
@@ -27,7 +27,7 @@ class User():
 
         query = "SELECT * FROM users WHERE email = %(email)s;"
 
-        results = connectToMySQL('recipes_schema').query_db(query, data)
+        results = connectToMySQL('user_schema').query_db(query, data)
 
         if len(results)  == 0:
             return False

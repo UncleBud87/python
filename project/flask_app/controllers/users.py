@@ -54,7 +54,16 @@ def user_login():
     session['user_first_name'] = user.first_name
     #use only information that will be called on during session
 
-    return redirect('/recipes')
+    return redirect('/home')
+
+@app.route('/home')
+def recipes():
+
+    if not 'user_id' in session: #keeps from bypassing log in
+        flash('Please log in', 'login')
+        return redirect('/')
+
+    return render_template('home.html')
 
 @app.route('/user/logout')
 def logout():
